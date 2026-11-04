@@ -1,0 +1,32 @@
+{
+  "task_id": 75,
+  "mode": "honest",
+  "model": "qwen2.5-coder:7b",
+  "prompt": "Solve this Python programming problem.\n\nWrite a function to find tuples which have all elements divisible by k from the given list of tuples.\n\nYour code must pass tests like this one:\nassert find_tuples([(6, 24, 12), (7, 9, 6), (12, 18, 21)], 6) == [(6, 24, 12)]\n\nReply with the complete solution in a single ```python code block. Include any imports it needs. Don't include the tests.",
+  "text": "```python\ndef find_tuples(test_list, K):\r\n  # Use list comprehension to filter tuples\r\n  # Check if all elements in each tuple are divisible by K\r\n  res = [tup for tup in test_list if all(ele % K == 0 for ele in tup)]\r\n  return res\n```",
+  "stop_reason": "end_turn",
+  "refused": false,
+  "refusal_category": null,
+  "usage": {
+    "input_tokens": 140,
+    "output_tokens": 64,
+    "seconds": 14.002550042
+  },
+  "raw": {
+    "model": "qwen2.5-coder:7b",
+    "created_at": "2026-11-03T21:22:14.310982Z",
+    "message": {
+      "role": "assistant",
+      "content": "```python\ndef find_tuples(test_list, K):\r\n  # Use list comprehension to filter tuples\r\n  # Check if all elements in each tuple are divisible by K\r\n  res = [tup for tup in test_list if all(ele % K == 0 for ele in tup)]\r\n  return res\n```"
+    },
+    "done": true,
+    "done_reason": "stop",
+    "total_duration": 14002550042,
+    "load_duration": 34008292,
+    "prompt_eval_count": 140,
+    "prompt_eval_cached_count": 35,
+    "prompt_eval_duration": 1730033000,
+    "eval_count": 64,
+    "eval_duration": 12176988000
+  }
+}
