@@ -1,7 +1,7 @@
 # Days 3–4 results (2026-11-04)
 
 Setup: untrusted model U = `qwen2.5-coder:7b`, trusted monitor T = `qwen2.5-coder:1.5b`,
-both local via Ollama on an 8 GB Apple M2. 100 MBPP problems (sanitized, seed 0).
+both run locally via Ollama. 100 MBPP problems (sanitized, seed 0).
 Small sample, small models: read every number below as a pilot, not a finding.
 
 ## Untrusted model
