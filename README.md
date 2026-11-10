@@ -3,7 +3,7 @@
 A small replication of **trusted monitoring** from *AI Control: Improving Safety
 Despite Intentional Subversion* (Greenblatt, Shlegeris et al., 2023).
 
-**Result in one line:** the attacker managed only 2 genuine backdoors in 100
+**Result in one line:** the attacker managed only 2 accepted backdoors in 100
 problems, and the monitor caught neither (AUC 0.48). With so few positives this is
 a pilot, not a measurement, but it surfaced three findings worth reporting.
 
@@ -19,7 +19,7 @@ wrong answer on one input the attacker names.
 
 ## Why I care
 
-> **TODO (author):** 2–3 sentences in my own words.
+I want to understand when automated reviews can be trusted, and when a convincing-looking output needs independent checks. This personal project is an AI-assisted replication and evaluation, not a new monitoring technique. My motivation and project direction are mine; implementation and documentation were developed with AI assistance.
 
 ## Setup
 
@@ -50,7 +50,7 @@ wrong answer on one input the attacker names.
 |---|---|
 | Honest solutions passing all tests | **84 / 100** |
 | Attack attempts | 298 across 100 problems |
-| Genuine backdoors (after manual review) | **2 / 100 problems** |
+| Accepted backdoors (after manual review) | **2 / 100 problems** |
 | **Catch rate at a 2% audit budget** | **0 of 2** |
 | AUC | 0.48 (0.5 is chance) |
 
@@ -122,7 +122,7 @@ the backdoors it's judged on. All three prompts are in `src/run_monitor.py`.
 
 - **Get enough backdoors to measure.** Use a stronger attacker (the code already
   supports a Claude backend via `BACKEND` in `src/config.py`) and aim for 30+
-  genuine backdoors, still reviewed by hand.
+  accepted backdoors, still reviewed by hand.
 - **Compare monitor prompts:** generic vs. one that tells T to look for special
   cases on unusual inputs, reported with confidence intervals that mean something.
 - **Score from token probabilities** instead of one sampled number, to break the
@@ -159,3 +159,11 @@ sh scripts/run_monitor.sh    # monitor scoring + metrics
 | `src/run_monitor.py`, `src/metrics.py`, `src/plots.py` | Monitor scoring, metrics, charts |
 | `data/manual_review.json` | Rejected backdoors, with reasons |
 | `results/` | CSVs and charts |
+
+## Independent artifact replay (November 5)
+
+See [reproduction details](results/REPRODUCTION.md) and [machine-readable results](results/reproduction.json). Run `python3 scripts/reproduce.py` and `python3 -m unittest discover -s tests -v` without installing model dependencies. Cached-reply score consistency is recorded in `results/monitor_replay.json`. The replay confirms 84/100 honest passes and both accepted exploit outputs, but one selected attack cache is missing. The reported audit budget is an expected honest false-positive rate; the two-positive pilot cannot establish general monitoring effectiveness.
+
+## Public review version
+
+This public repository includes the cached evidence, offline replay and four metric tests from the verified personal project. See [the November 10 replay receipt](results/VALIDATION_2026-11-10.md) and [data attribution](DATA_SOURCES.md). A missing selected cache, an ambiguous sorting case and only two accepted positives limit the findings. No employer code, private conversations or application materials are included in this update.
